@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,51 +25,8 @@
 </head>
 <body>
     <!-- 헤더 -->
-    <header>
-        <div class="header-inner">
-            <div class="box-logo">
-                <a href="./home.html">
-                    <img src="/images/header_logo.png" alt="" srcset="/images/header_logo.png 1x, /images/header_logo@2x.png 2x">
-                </a>
-            </div>
+    <div th:replace="~{main/fragments/menu :: menu}"></div>
 
-            <div class="wrap-menu">
-                <div class="box-btn">
-                    <div class="btn-link">
-                        <a href="#none">한국어</a>
-                    </div>
-                    <div class="btn-direct">
-                        <a href="./contact.html">Get Started</a>
-                    </div>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="./home">Home</a></li>
-                        <li class="on"><a href="./about-us">About Us</a></li>
-                        <li><a href="./services">Services</a></li>
-                        <li><a href="./portfolio">Portfolio</a></li>
-                        <li><a href="./blog">Blog</a></li>
-                        <li><a href="./contact">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <div class="box-btn pc-menu">
-                <div class="btn-link">
-                    <a href="#none">한국어</a>
-                </div>
-                <div class="btn-direct">
-                    <a href="./contact">Get Started</a>
-                </div>
-            </div>
-
-            <div class="btn-menu" onclick="$('header').toggleClass('active')">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
-            </div>
-        </div>
-    </header>
 
     <main class="aboutpage">
 
