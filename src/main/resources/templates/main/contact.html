@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<meta name="twitter:card" content="" />
+    
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="">
+
+    <!-- css -->
+    <link href="/css/aos.css" rel="stylesheet" type="text/css">
+	<link href="/css/common.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+
+    <!-- js -->
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/aos.js"></script>
+
+    <title>Contact</title>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="header-inner">
+            <div class="box-logo">
+                <a href="./home">
+                    <img src="/images/header_logo.png" alt="" srcset="/images/header_logo.png 1x, /images/header_logo@2x.png 2x">
+                </a>
+            </div>
+
+            <div class="wrap-menu">
+                <div class="box-btn">
+                    <div class="btn-link">
+                        <a href="#none">한국어</a>
+                    </div>
+                    <div class="btn-direct">
+                        <a href="./contact">Get Started</a>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="./home">Home</a></li>
+                        <li><a href="./about-us">About Us</a></li>
+                        <li><a href="./services">Services</a></li>
+                        <li><a href="./portfolio">Portfolio</a></li>
+                        <li><a href="./blog">Blog</a></li>
+                        <li class="on"><a href="./contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="box-btn pc-menu">
+                <div class="btn-link">
+                    <a href="#none">한국어</a>
+                </div>
+                <div class="btn-direct">
+                    <a href="./contact">Get Started</a>
+                </div>
+            </div>
+
+            <div class="btn-menu" onclick="$('header').toggleClass('active')">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="bg-circle-between">
+
+        <!-- 1. 폼 섹션 -->
+        <section class="contact-form">
+            <div class="cont-inner">
+                <div class="wrap-title">
+                    <h2 class="tit" data-aos="fade-up">Get in Touch</h2>
+                    <p class="subtxt" data-aos="fade-up" data-aos-delay="100">Ready to Transform Your Business?</p>
+                </div>
+                <div class="wrap-info" data-aos="fade-up" data-aos-delay="300">
+                    <div class="info-item mail">
+                        <a class="item-text" href="mailto:hello@synact.ai">hello@synact.ai</a>
+                    </div>
+                    <div class="info-item tel">
+                        <a class="item-text" href="tel:+82-2-1234-5678">+82-2-1234-5678</a>
+                    </div>
+                    <div class="info-item map">
+                        <span class="item-text">Seoul, South Korea</span>
+                    </div>
+                </div>
+                <div class="wrap-form" data-aos="fade-up" data-aos-delay="500">
+                    <form action="#" method="post" onsubmit="return false;">
+                        <div class="box-desc">Tell us about your project and we'll get back to you within 24 hours.</div>
+                        <div class="form-inner">
+                            <div class="field-wrap">
+                                <label>
+                                    <div class="form-label">Name</div>
+                                    <input type="text" class="form-input" required>
+                                </label>
+                                <label>
+                                    <div class="form-label">Email</div>
+                                    <input type="email" class="form-input" required>
+                                </label>
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    <div class="form-label">Company</div>
+                                    <input type="text" class="form-input" required>
+                                </label>
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    <div class="form-label">Message</div>
+                                    <textarea name="" class="form-input" row="3" required></textarea>
+                                </label>
+                            </div>
+                            <div class="box-btn">
+                                <button type="submit" class="btn-submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+
+        
+        <!-- 2. 공통 하단 섹션 -->
+        <section class="contact-bottom common-bottom">
+            <div class="cont-inner">
+                <h2 class="title" data-aos="fade-up">Why Choose synact.ai?</h2>
+                <div class="wrap-desc" data-aos="fade-up" data-aos-delay="100">
+                    <p class="txt" data-aos="fade-up" data-aos-delay="200">Global expertise with local market knowledge</p>
+                    <p class="txt" data-aos="fade-up" data-aos-delay="400">Proven track record of successful AI implementations</p>
+                    <p class="txt" data-aos="fade-up" data-aos-delay="600">End-to-end support from strategy to implementation</p>
+                    <p class="txt" data-aos="fade-up" data-aos-delay="800">Bilingual team serving Korean and international markets</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/common.js"></script>
+</body>
+</html>

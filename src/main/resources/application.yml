@@ -1,0 +1,15 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_PASSWORD}    # Not your Gmail password, use an App Password
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.transport.protocol: smtp
+      mail.debug: false
+      # optional default From
+app:
+  mail:
+    from: "VinoHub <hans.shon@gmail.com>"  # or your gmail address

@@ -1,0 +1,49 @@
+### Docs / misc ###
+HELP.md
+.DS_Store
+*.log
+
+### Maven ###
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### Gradle (in case you ever use it) ###
+.gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### Spring Boot / secrets (IMPORTANT) ###
+# Keep application.properties tracked (placeholders only),
+# but never commit real credentials files.
+src/main/resources/application-local.properties
+src/main/resources/application-dev.properties
+src/main/resources/application-prod.properties
+src/main/resources/application-secret.properties
+.env
+.env.*
+
+# Optional: if you insist on not tracking application.properties at all (NOT recommended),
+# uncomment the next line:
+# src/main/resources/application.properties
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+### VS Code ###
+.vscode/

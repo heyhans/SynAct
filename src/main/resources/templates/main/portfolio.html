@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<meta name="twitter:card" content="" />
+    
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="">
+
+    <!-- css -->
+    <link href="/css/aos.css" rel="stylesheet" type="text/css">
+	<link href="/css/common.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+
+    <!-- js -->
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/aos.js"></script>
+
+    <title>Portfolio Main</title>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="header-inner">
+            <div class="box-logo">
+                <a href="./home">
+                    <img src="/images/header_logo.png" alt="" srcset="/images/header_logo.png 1x, /images/header_logo@2x.png 2x">
+                </a>
+            </div>
+
+            <div class="wrap-menu">
+                <div class="box-btn">
+                    <div class="btn-link">
+                        <a href="#none">한국어</a>
+                    </div>
+                    <div class="btn-direct">
+                        <a href="./contact">Get Started</a>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="./home">Home</a></li>
+                        <li><a href="./about-us">About Us</a></li>
+                        <li><a href="./services">Services</a></li>
+                        <li class="on"><a href="./portfolio">Portfolio</a></li>
+                        <li><a href="./blog">Blog</a></li>
+                        <li><a href="./contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="box-btn pc-menu">
+                <div class="btn-link">
+                    <a href="#none">한국어</a>
+                </div>
+                <div class="btn-direct">
+                    <a href="./contact">Get Started</a>
+                </div>
+            </div>
+
+            <div class="btn-menu" onclick="$('header').toggleClass('active')">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. 인트로 섹션 -->
+        <section class="portfolio-intro">
+            <div class="cont-inner">
+                <div class="intro-top">
+                    <h2 class="tit" data-aos="fade-up">Our</h2>
+                    <img src="/images/portfolio_intro-logo.png" alt="" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="tit" data-aos="fade-up" data-aos-delay="400">Portfolio</h2>
+                </div>
+                <div class="intro-desc" data-aos="fade-up" data-aos-delay="500">
+                    <p class="desc">Successful <br>AI Transformations</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 2. 목록 섹션 -->
+        <section class="portfolio-list">
+            <div class="cont-inner">
+                <div class="wrap-list">
+
+                    <div class="list-item" data-aos="fade-up">
+                        <div class="box-top">
+                            <div class="tag">AI Automation</div>
+                            <p class="subtxt">300% Efficiency Increase ↑</p>
+                        </div>
+                        <div class="box-main">
+                            <p class="tit">E-commerce Automation</p>
+                            <p class="desc">Increased operational efficiency by 300% through intelligent inventory management and customer service automation.</p>
+                        </div>
+                        <div class="box-label">
+                            <div class="label">E-commerce</div>
+                            <div class="label">Automation</div>
+                            <div class="label">Inventory Management</div>
+                        </div>
+                        <div class="box-btn">
+                            <a href="portfolio-detail" class="btn-link">View Case Study</a>
+                        </div>
+                    </div>
+                    <div class="list-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="box-top">
+                            <div class="tag">Financial Technology </div>
+                            <p class="subtxt">95% Time Reduction ↓</p>
+                        </div>
+                        <div class="box-main">
+                            <p class="tit">Financial Analytics</p>
+                            <p class="desc">Built AI-powered risk assessment system that reduced processing time from hours to minutes.</p>
+                        </div>
+                        <div class="box-label">
+                            <div class="label">Finance</div>
+                            <div class="label">Risk Assessment</div>
+                            <div class="label">Real-time Processing</div>
+                        </div>
+                        <div class="box-btn">
+                            <a href="portfolio-detail" class="btn-link">View Case Study</a>
+                        </div>
+                    </div>
+                    <div class="list-item" data-aos="fade-up">
+                        <div class="box-top">
+                            <div class="tag">Healthcare Technology</div>
+                            <p class="subtxt">40% Improved Satisfaction ↑</p>
+                        </div>
+                        <div class="box-main">
+                            <p class="tit">Healthcare Optimization</p>
+                            <p class="desc">Developed automated patient flow system improving hospital efficiency and patient satisfaction.</p>
+                        </div>
+                        <div class="box-label">
+                            <div class="label">Healthcare</div>
+                            <div class="label">Patient Flow</div>
+                            <div class="label">Optimization</div>
+                        </div>
+                        <div class="box-btn">
+                            <a href="portfolio-detail" class="btn-link">View Case Study</a>
+                        </div>
+                    </div>
+                    <div class="list-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="box-top">
+                            <div class="tag">Industrial IoT</div>
+                            <p class="subtxt">60% Downtime Reduction ↓</p>
+                        </div>
+                        <div class="box-main">
+                            <p class="tit">Manufacturing Optimization</p>
+                            <p class="desc">Implemented predictive maintenance system using IoT sensors and AI analytics to prevent equipment failures.</p>
+                        </div>
+                        <div class="box-label">
+                            <div class="label">Manufacturing</div>
+                            <div class="label">IoT</div>
+                            <div class="label">Predictive Analytics</div>
+                        </div>
+                        <div class="box-btn">
+                            <a href="portfolio-detail" class="btn-link">View Case Study</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="wrap-pagination" data-aos="fade-up">
+                    <ul class="pagination">
+                        <li class="btn-pagi prev"><a href="#none"></a></li>
+                        <li class="active"><a href="#none">1</a></li>
+                        <li><a href="#none">2</a></li>
+                        <li class="btn-pagi next"><a href="#none"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- 3. 공통 하단 섹션 -->
+        <section class="portfolio-bottom common-bottom">
+            <div class="cont-inner">
+                <h2 class="title" data-aos="fade-up">Ready to Create Your Success Story?</h2>
+                <div class="wrap-desc" data-aos="fade-up" data-aos-delay="300">
+                    <p class="subtxt">
+                        Join the growing list of companies that have transformed <br class="pc">
+                        their operations <strong>with our AI automation solutions.</strong>
+                    </p>
+                </div>
+                <div class="wrap-btn" data-aos="fade-up" data-aos-delay="500" data-aos-anchor-placement="center-bottom">
+                    <div class="btn btn-white btn-arrow">
+                        <a href="#none">Start Your Project</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/common.js"></script>
+</body>
+</html>
