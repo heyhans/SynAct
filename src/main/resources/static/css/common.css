@@ -211,3 +211,44 @@ section.common-bottom .wrap-btn {margin-top: 8rem;gap:19px;display: flex;justify
   section.common-bottom .wrap-desc .subtxt {padding:0 10px;}
   section.common-bottom .wrap-btn {flex-wrap: wrap;gap:10px;}
 }
+
+.field-error {
+    display: none;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.2;
+    color: #ff6b6b;
+}
+
+.form-input.is-invalid {
+    border-color: rgba(255, 107, 107, 0.9);
+    box-shadow: 0 0 0 1px rgba(255, 107, 107, 0.25);
+}
+
+button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+/* Consent row layout */
+.consent{
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Make checkbox visible even if global input styles exist */
+.consent input[type="checkbox"]{
+    appearance: auto;           /* key: restores default checkbox */
+    -webkit-appearance: auto;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    flex: 0 0 auto;
+    accent-color: #5B8CFF;      /* optional */
+}
+
+/* Ensure your span text doesn’t overlap */
+.consent span{
+    display: inline-block;
+    line-height: 1.4;
+}

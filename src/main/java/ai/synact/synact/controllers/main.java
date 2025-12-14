@@ -1,11 +1,13 @@
 package ai.synact.synact.controllers;
 
+import ai.synact.synact.dto.ContactMessageRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,8 +38,12 @@ public class main {
     }
 
     @GetMapping("/contact")
-    public String contact(Model model) {
+    public String contact(@RequestParam(required = false) Integer success,
+                          Model model) {
         model.addAttribute("activeMenu", "contact");
+        model.addAttribute("contactForm", new ContactMessageRequest());
+        model.addAttribute("success", success != null && success == 1);
+
         return "/main/contact";
     }
 

@@ -1,29 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head th:replace="~{main/fragments/head :: head('SynAct Contact')}"></head>
 
-    <meta property="og:title" content="" />
-	<meta property="og:image" content="" />
-	<meta property="og:url" content="" />
-	<meta name="twitter:card" content="" />
-    
-	<!-- Fav and touch icons -->
-	<link rel="shortcut icon" href="">
-
-    <!-- css -->
-    <link href="/css/aos.css" rel="stylesheet" type="text/css">
-	<link href="/css/common.css" rel="stylesheet" type="text/css">
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
-
-    <!-- js -->
-    <script src="/js/jquery-3.5.1.min.js"></script>
-    <script src="/js/aos.js"></script>
-
-    <title>Contact</title>
-</head>
 <body>
     <!-- 헤더 -->
     <div th:replace="~{main/fragments/menu :: menu}"></div>
@@ -37,68 +16,348 @@
                     <h2 class="tit" data-aos="fade-up">Get in Touch</h2>
                     <p class="subtxt" data-aos="fade-up" data-aos-delay="100">Ready to Transform Your Business?</p>
                 </div>
-                <div class="wrap-info" data-aos="fade-up" data-aos-delay="300">
-                    <div class="info-item mail">
-                        <a class="item-text" href="mailto:hello@synact.ai">hello@synact.ai</a>
-                    </div>
-                    <div class="info-item tel">
-                        <a class="item-text" href="tel:+82-2-1234-5678">+82-2-1234-5678</a>
-                    </div>
-                    <div class="info-item map">
-                        <span class="item-text">Seoul, South Korea</span>
-                    </div>
-                </div>
+
+<!--                <div class="wrap-info" data-aos="fade-up" data-aos-delay="300">-->
+<!--                    <div class="info-item mail">-->
+<!--                        <a class="item-text" href="mailto:hello@synact.ai">hello@synact.ai</a>-->
+<!--                    </div>-->
+<!--                    <div class="info-item tel">-->
+<!--                        <a class="item-text" href="tel:+82-2-1234-5678">+82-2-1234-5678</a>-->
+<!--                    </div>-->
+<!--                    <div class="info-item map">-->
+<!--                        <span class="item-text">Seoul, South Korea</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
                 <div class="wrap-form" data-aos="fade-up" data-aos-delay="500">
-                    <form action="#" method="post" onsubmit="return false;">
-                        <div class="box-desc">Tell us about your project and we'll get back to you within 24 hours.</div>
+                    <form th:action="@{/web/contact}" th:object="${contactForm}" method="post">
+                        <!-- CSRF (needed if Spring Security CSRF is enabled) -->
+                        <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                        <div class="box-desc">Please fill in the form below to get in touch with us.</div>
+
                         <div class="form-inner">
-                            <div class="field-wrap">
-                                <label>
-                                    <div class="form-label">Name</div>
-                                    <input type="text" class="form-input" required>
+
+                            <!-- Row 1: First / Last name -->
+                            <div class="field-wrap field-2col">
+                                <label class="field">
+                                    <input type="text"
+                                           class="form-input"
+                                           th:field="*{firstName}"
+                                           placeholder="First name"
+                                           autocomplete="given-name">
+                                    <small class="field-error" data-for="firstName"></small>
                                 </label>
-                                <label>
-                                    <div class="form-label">Email</div>
-                                    <input type="email" class="form-input" required>
+
+                                <label class="field">
+                                    <input type="text"
+                                           class="form-input"
+                                           th:field="*{lastName}"
+                                           placeholder="Last name"
+                                           autocomplete="family-name">
+                                    <small class="field-error" data-for="lastName"></small>
                                 </label>
                             </div>
-                            <div class="field-wrap">
-                                <label>
-                                    <div class="form-label">Company</div>
-                                    <input type="text" class="form-input" required>
+
+                            <!-- Row 2: Email / Phone -->
+                            <div class="field-wrap field-2col">
+                                <label class="field">
+                                    <input type="text"
+                                           class="form-input"
+                                           th:field="*{email}"
+                                           placeholder="Email address"
+                                           autocomplete="email">
+                                    <small class="field-error" data-for="email"></small>
+                                </label>
+
+                                <label class="field">
+                                    <input type="text"
+                                           class="form-input"
+                                           th:field="*{phone}"
+                                           placeholder="Phone number (e.g. +821012345678)"
+                                           autocomplete="tel">
+                                    <small class="field-error" data-for="phone"></small>
                                 </label>
                             </div>
+
+                            <!-- Row 3: Company (full width) -->
                             <div class="field-wrap">
-                                <label>
-                                    <div class="form-label">Message</div>
-                                    <textarea name="" class="form-input" row="3" required></textarea>
+                                <label class="field field-full">
+                                    <input type="text"
+                                           class="form-input"
+                                           th:field="*{company}"
+                                           placeholder="Company"
+                                           autocomplete="organization">
+                                    <small class="field-error" data-for="company"></small>
                                 </label>
                             </div>
+
+                            <!-- Row 4: Message (full width) -->
+                            <div class="field-wrap">
+                                <label class="field field-full">
+                                    <textarea class="form-input"
+                                              th:field="*{message}"
+                                              rows="4"
+                                              placeholder="Message"></textarea>
+                                    <small class="field-error" data-for="message"></small>
+                                </label>
+                            </div>
+
+                            <!-- Row 5: Consent (not stored in DB; used to block submission) -->
+                            <div class="field-wrap">
+                                <label class="consent">
+                                    <input type="checkbox" id="consent" name="consent">
+                                    <span>
+                                        I’ve read and agree with
+                                        <a href="#none">Terms of Service</a>
+                                        and
+                                        <a href="#none">Privacy Policy</a>
+                                    </span>
+                                </label>
+                                <small class="field-error" data-for="consent"></small>
+                            </div>
+
                             <div class="box-btn">
-                                <button type="submit" class="btn-submit">Send Message</button>
+                                <button type="submit" class="btn-submit" id="contactSubmit">Send Message</button>
                             </div>
+
                         </div>
                     </form>
                 </div>
-            </div>
 
+            </div>
         </section>
 
-        
+
         <!-- 2. 공통 하단 섹션 -->
         <section class="contact-bottom common-bottom">
             <div class="cont-inner">
-                <h2 class="title" data-aos="fade-up">Why Choose synact.ai?</h2>
+                <h2 class="title" data-aos="fade-up">Why Choose SynAct.ai?</h2>
                 <div class="wrap-desc" data-aos="fade-up" data-aos-delay="100">
-                    <p class="txt" data-aos="fade-up" data-aos-delay="200">Global expertise with local market knowledge</p>
-                    <p class="txt" data-aos="fade-up" data-aos-delay="400">Proven track record of successful AI implementations</p>
-                    <p class="txt" data-aos="fade-up" data-aos-delay="600">End-to-end support from strategy to implementation</p>
-                    <p class="txt" data-aos="fade-up" data-aos-delay="800">Bilingual team serving Korean and international markets</p>
+                    <p class="txt" data-aos="fade-up" data-aos-delay="200">AI that ships—fast, reliable, measurable.</p>
+                    <p class="txt" data-aos="fade-up" data-aos-delay="400">Security-first delivery with clear data boundaries.</p>
+                    <p class="txt" data-aos="fade-up" data-aos-delay="600">Automation that cuts time, errors, and cost.</p>
+                    <p class="txt" data-aos="fade-up" data-aos-delay="800">A partner team that stays after launch.</p>
                 </div>
             </div>
         </section>
     </main>
 
+
     <script src="/js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Thymeleaf removes th:* in the final HTML, so don't query th:object.
+            const form =
+                document.querySelector('form[action*="/web/contact"]') ||
+                document.querySelector('form');
+
+            if (!form) return;
+
+            // Fields (th:field will render "name" like firstName, lastName, etc.)
+            const firstName = form.querySelector('[name$="firstName"]');
+            const lastName  = form.querySelector('[name$="lastName"]');
+            const email     = form.querySelector('[name$="email"]');
+            const phone     = form.querySelector('[name$="phone"]');
+            const company   = form.querySelector('[name$="company"]');
+            const message   = form.querySelector('[name$="message"]');
+            const consent   = form.querySelector('#consent');
+            const submitBtn = form.querySelector('#contactSubmit, button[type="submit"]');
+
+            // Regex rules (match your DTO intent)
+            const NAME_RE  = /^[A-Za-z]+(?:[ '-][A-Za-z]+)*$/;
+            const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const PHONE_RE = /^\+[1-9]\d{7,14}$/;
+
+            // Track interaction so we don't show errors on initial load
+            const touched = {
+                firstName: false,
+                lastName: false,
+                email: false,
+                phone: false,
+                company: false,
+                message: false,
+                consent: false,
+            };
+            let submitAttempted = false;
+
+            function getErrorEl(key) {
+                // Use your existing placeholders: <small class="field-error" data-for="...">
+                let el = form.querySelector(`.field-error[data-for="${key}"]`);
+                if (!el) {
+                    el = document.createElement('small');
+                    el.className = 'field-error';
+                    el.dataset.for = key;
+                    // fallback append (shouldn't happen if your HTML already has the <small>)
+                    form.appendChild(el);
+                }
+                return el;
+            }
+
+            function setInvalid(inputEl, errorEl, msg, show) {
+                if (inputEl) inputEl.classList.add('is-invalid');
+                if (!errorEl) return;
+                if (show) {
+                    errorEl.textContent = msg || '';
+                    errorEl.style.display = msg ? 'block' : 'none';
+                } else {
+                    // do not display message before touch/submit
+                    errorEl.textContent = '';
+                    errorEl.style.display = 'none';
+                }
+            }
+
+            function setValid(inputEl, errorEl) {
+                if (inputEl) inputEl.classList.remove('is-invalid');
+                if (errorEl) {
+                    errorEl.textContent = '';
+                    errorEl.style.display = 'none';
+                }
+            }
+
+            function shouldShow(key) {
+                return submitAttempted || touched[key] === true;
+            }
+
+            // Each validator returns boolean. It only shows messages when shouldShow(key) is true.
+            function validateFirstName() {
+                const key = 'firstName';
+                const v = (firstName?.value || '').trim();
+                const err = getErrorEl(key);
+                const show = shouldShow(key);
+
+                if (!v) { setInvalid(firstName, err, 'First name is required.', show); return false; }
+                if (!NAME_RE.test(v)) { setInvalid(firstName, err, "English letters only. Use space, - or '.", show); return false; }
+                setValid(firstName, err); return true;
+            }
+
+            function validateLastName() {
+                const key = 'lastName';
+                const v = (lastName?.value || '').trim();
+                const err = getErrorEl(key);
+                const show = shouldShow(key);
+
+                if (!v) { setInvalid(lastName, err, 'Last name is required.', show); return false; }
+                if (!NAME_RE.test(v)) { setInvalid(lastName, err, "English letters only. Use space, - or '.", show); return false; }
+                setValid(lastName, err); return true;
+            }
+
+            function validateEmail() {
+                const key = 'email';
+                const v = (email?.value || '').trim();
+                const err = getErrorEl(key);
+                const show = shouldShow(key);
+
+                if (!v) { setInvalid(email, err, 'Email is required.', show); return false; }
+                if (!EMAIL_RE.test(v)) { setInvalid(email, err, 'Please enter a valid email address.', show); return false; }
+                setValid(email, err); return true;
+            }
+
+            function validatePhone() {
+                const key = 'phone';
+                const v = (phone?.value || '').trim();
+                const err = getErrorEl(key);
+                const show = shouldShow(key);
+
+                if (!v) { setInvalid(phone, err, 'Phone number is required.', show); return false; }
+                if (!PHONE_RE.test(v)) { setInvalid(phone, err, 'Use E.164 format, e.g. +821012345678.', show); return false; }
+                setValid(phone, err); return true;
+            }
+
+            function validateCompany() {
+                const key = 'company';
+                const v = (company?.value || '').trim();
+                const err = getErrorEl(key);
+                const show = shouldShow(key);
+
+                if (v.length > 255) { setInvalid(company, err, 'Company must be 255 characters or less.', show); return false; }
+                setValid(company, err); return true;
+            }
+
+            function validateMessage() {
+                const key = 'message';
+                const v = (message?.value || '').trim();
+                const err = getErrorEl(key);
+                const show = shouldShow(key);
+
+                if (!v) { setInvalid(message, err, 'Message is required.', show); return false; }
+                if (v.length > 2000) { setInvalid(message, err, 'Message must be 2000 characters or less.', show); return false; }
+                setValid(message, err); return true;
+            }
+
+            function validateConsent() {
+                const key = 'consent';
+                const err = getErrorEl(key);
+                const show = shouldShow(key);
+
+                if (!consent?.checked) {
+                    // no inputEl to highlight here; show message only after touch/submit
+                    if (show) { err.textContent = 'You must agree to proceed.'; err.style.display = 'block'; }
+                    else { err.textContent = ''; err.style.display = 'none'; }
+                    return false;
+                }
+                err.textContent = '';
+                err.style.display = 'none';
+                return true;
+            }
+
+            function updateButtonState() {
+                const ok =
+                    validateFirstName() &&
+                    validateLastName() &&
+                    validateEmail() &&
+                    validatePhone() &&
+                    validateCompany() &&
+                    validateMessage() &&
+                    validateConsent();
+
+                if (submitBtn) submitBtn.disabled = !ok;
+                return ok;
+            }
+
+            // Mark touched and validate on interaction
+            function bindLive(el, key, validator) {
+                if (!el) return;
+                el.addEventListener('input', () => { touched[key] = true; validator(); updateButtonState(); });
+                el.addEventListener('blur',  () => { touched[key] = true; validator(); updateButtonState(); });
+            }
+
+            bindLive(firstName, 'firstName', validateFirstName);
+            bindLive(lastName,  'lastName',  validateLastName);
+            bindLive(email,     'email',     validateEmail);
+            bindLive(phone,     'phone',     validatePhone);
+            bindLive(company,   'company',   validateCompany);
+            bindLive(message,   'message',   validateMessage);
+
+            if (consent) {
+                consent.addEventListener('change', () => {
+                    touched.consent = true;
+                    validateConsent();
+                    updateButtonState();
+                });
+            }
+
+            // On submit: show everything
+            form.addEventListener('submit', (e) => {
+                submitAttempted = true;
+                // Force display rules now that submit is attempted
+                const ok = updateButtonState();
+                if (!ok) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            });
+
+            // INITIALIZE:
+            // 1) Hide all client-side error placeholders
+            ['firstName','lastName','email','phone','company','message','consent'].forEach(k => {
+                const el = getErrorEl(k);
+                el.textContent = '';
+                el.style.display = 'none';
+            });
+            // 2) Don't show errors; just disable/enable button based on current values
+            updateButtonState();
+        });
+    </script>
 </body>
 </html>

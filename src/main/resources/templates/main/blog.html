@@ -1,29 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head th:replace="~{main/fragments/head :: head('SynAct Blog')}"></head>
 
-    <meta property="og:title" content="" />
-	<meta property="og:image" content="" />
-	<meta property="og:url" content="" />
-	<meta name="twitter:card" content="" />
-    
-	<!-- Fav and touch icons -->
-	<link rel="shortcut icon" href="">
-
-    <!-- css -->
-    <link href="/css/aos.css" rel="stylesheet" type="text/css">
-	<link href="/css/common.css" rel="stylesheet" type="text/css">
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
-
-    <!-- js -->
-    <script src="/js/jquery-3.5.1.min.js"></script>
-    <script src="/js/aos.js"></script>
-
-    <title>Blog Main</title>
-</head>
 <body>
     <!-- 헤더 -->
     <div th:replace="~{main/fragments/menu :: menu}"></div>
