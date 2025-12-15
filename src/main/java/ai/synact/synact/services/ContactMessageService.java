@@ -8,40 +8,77 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class ContactMessageService {
 
     private final ContactMessageRepository contactMessageRepository;
+    private final TelegramService telegramService;
 
-    public Long save(ContactMessageRequest req, HttpServletRequest request) {
-        String ip = getClientIp(request);
-        String ua = request.getHeader("User-Agent");
+    @Transactional
+    public void save(ContactMessageRequest request, HttpServletRequest httpRequest) {
 
-        ContactMessage entity = ContactMessage.builder()
-                .firstName(req.getFirstName().trim())
-                .lastName(req.getLastName().trim())
-                .email(req.getEmail().trim())
-                .phone(req.getPhone().trim())
-                .company(req.getCompany() == null ? null : req.getCompany().trim())
-                .message(req.getMessage().trim())
-                .ipAddress(ip)
-                .userAgent(ua != null && ua.length() > 255 ? ua.substring(0, 255) : ua)
-                .telegramSent(false)
-                .build();
+        ContactMessage saved = contactMessageRepository.save(
+                ContactMessage.builder()
+                        .firstName(request.getFirstName())
+                        .lastName(request.getLastName())
+                        .email(request.getEmail())
+                        .phone(request.getPhone())
+                        .company(request.getCompany())
+                        .message(request.getMessage())
+                        .ipAddress(getClientIp(httpRequest))
+                        .userAgent(safeTruncate(httpRequest.getHeader("User-Agent"), 255))
+                        .telegramSent(false)
+                        .build()
+        );
 
-        return contactMessageRepository.save(entity).getId();
+        String telegramText = buildTelegramText(saved);
+
+        boolean ok = telegramService.sendContactMessage(telegramText);
+        if (ok) {
+            saved.setTelegramSent(true);
+            saved.setTelegramSentAt(LocalDateTime.now());
+            contactMessageRepository.save(saved);
+        }
     }
 
-    private String getClientIp(HttpServletRequest request) {
-        String xff = request.getHeader("X-Forwarded-For"); // if behind proxy
-        if (xff != null && !xff.isBlank()) {
-            return xff.split(",")[0].trim();
-        }
-        String xri = request.getHeader("X-Real-IP");
-        if (xri != null && !xri.isBlank()) return xri.trim();
+    private String buildTelegramText(ContactMessage m) {
+        // Telegram HTML mode: escape <, >, &
+        return """
+                <b>📩 New Contact Message</b>
+                <b>Name:</b> %s %s
+                <b>Email:</b> %s
+                <b>Phone:</b> %s
+                <b>Company:</b> %s
+                <b>Message:</b> %s
+                <b>IP:</b> %s
+                """.formatted(
+                esc(m.getFirstName()),
+                esc(m.getLastName()),
+                esc(m.getEmail()),
+                esc(m.getPhone()),
+                esc(m.getCompany() == null ? "-" : m.getCompany()),
+                esc(m.getMessage()),
+                esc(m.getIpAddress() == null ? "-" : m.getIpAddress())
+        );
+    }
 
-        return request.getRemoteAddr();
+    private String esc(String s) {
+        if (s == null) return "";
+        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+    }
+
+    private String safeTruncate(String s, int max) {
+        if (s == null) return null;
+        return s.length() <= max ? s : s.substring(0, max);
+    }
+
+    private String getClientIp(HttpServletRequest req) {
+        String xf = req.getHeader("X-Forwarded-For");
+        if (xf != null && !xf.isBlank()) return xf.split(",")[0].trim();
+        return req.getRemoteAddr();
     }
 }
