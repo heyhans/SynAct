@@ -33,6 +33,7 @@
                     <form th:action="@{/web/contact}" th:object="${contactForm}" method="post">
                         <!-- CSRF (needed if Spring Security CSRF is enabled) -->
                         <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <input type="hidden" name="recaptchaToken" id="recaptchaToken">
 
                         <div class="box-desc">Please fill in the form below to get in touch with us.</div>
 
@@ -359,5 +360,58 @@
             updateButtonState();
         });
     </script>
+
+    <script th:inline="javascript">
+        const RECAPTCHA_SITE_KEY = /*[[${@environment.getProperty('google.recaptcha.site-key')}]]*/ "";
+
+        // v3 loader
+    </script>
+    <script th:src="'https://www.google.com/recaptcha/api.js?render=' + ${@environment.getProperty('google.recaptcha.site-key')}" async defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            if (!form) return;
+
+            const tokenInput = document.getElementById('recaptchaToken');
+
+            // Call v3 and refresh token
+            async function refreshToken() {
+                if (!window.grecaptcha || !RECAPTCHA_SITE_KEY) return;
+                return new Promise((resolve) => {
+                    grecaptcha.ready(() => {
+                        grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'contact_submit' })
+                            .then((token) => {
+                                tokenInput.value = token;
+                                resolve(token);
+                            })
+                            .catch(() => resolve(null));
+                    });
+                });
+            }
+
+            // Get token on load
+            refreshToken();
+
+            // Refresh token before submit (important: token expires quickly)
+            form.addEventListener('submit', async (e) => {
+                // If token missing, prevent submit, fetch, then submit once
+                if (!tokenInput.value) {
+                    e.preventDefault();
+                    await refreshToken();
+                    if (tokenInput.value) form.submit();
+                }
+            });
+
+            // Optional: refresh token when user interacts (safer)
+            ['focusin', 'input', 'change'].forEach(evt => {
+                form.addEventListener(evt, () => {
+                    // don’t spam: just ensure there is *some* token
+                    if (!tokenInput.value) refreshToken();
+                }, { passive: true });
+            });
+        });
+    </script>
+
 </body>
 </html>

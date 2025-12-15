@@ -69,6 +69,12 @@
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
 
+        <!-- reCAPTCHA v3       -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
         <!-- Google APIs -->
         <dependency>
             <groupId>com.google.api-client</groupId>
